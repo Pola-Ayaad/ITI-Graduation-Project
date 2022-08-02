@@ -10,34 +10,32 @@ Creating Docker Image and pushing the image to Google artifacte registery :
 
 1- Create a Folder for the project mkdir gcp-terraform
 
-2- Clone the git repository to your folder git clone https://github.com/tradebyte/DevOps-Challenge
+2- Clone the git repository to your folder git clone https://github.com/nidhinshah/Accessing-DockerHub-Repos-IKS-Examples.git
 
 3- Create a Dockerfile for the project 
 
 ![image](https://user-images.githubusercontent.com/71693153/182429095-21dc9ecf-b1f9-4b32-8e83-db5a6f63da28.png)
 
+4- Build your image docker image build . -t (image-name)
 
-4- Create a bash file .sh to force run redis inside the container
+5- Make sure the image is up and running docker run -d -it (image-ID) bash
 
-5- Build your image docker image build . -t (image-name)
+6- Check running container docker ps
 
-6- Make sure the image is up and running docker run -d -it (image-ID) bash
+7- Create a Repository on DockerHub 
 
-7- Check running container docker ps
+8- Dockerhub Login on your terminal  --- (docker login)
 
-8- Configure Docker on gcp gcloud auth configure-docker \
-    us-east1-docker.pkg.dev 
-    
-9- Tag your image to push to google artifacte registery docker tag SOURCE-IMAGE LOCATION-docker.pkg.dev/PROJECT-ID/REPOSITORY/IMAGE
+9- Tag your Image ---(docker tag <existing-image> <hub-user>/<repo-name>[:<tag>])
 
-10- Push your Image docker push LOCATION-docker.pkg.dev/PROJECT-ID/REPOSITORY/IMAGE
-
+10- docker push <hub-user>/<repo-name>:<tag>
 
 Creating Terraform Files for Network  : 
    Note :  ---(Use terraform fmt)-- command to correct your files formate 
            ---GCP already supports state locking so there is no need to create a DynamoDB like
               in AWS state
            ---Run terrform init to intiate terraform enviroment and in case any changes in the backend.tf file you need to run the command again 
+           ---Add .gitignore file to add all the files that you wouldn't like to push to github ex: files with credentials for any unrelated files 
 
 
 1- Create provider file 
@@ -76,13 +74,22 @@ the service accounts intended to represent a non-human user that needs to authen
 5- SSH on the machine ---- gcloud compute ssh vm --zone=us-east1-b
 
 
-6- configure vm with gke credintials
+6- configure vm with gke credintials --- gcloud container clusters get-credentials my-gke-cluster --zone us-east1-b --project pola-gcp-project-1
 
-7- Create a deployment and service.yml files
+7- Create a deployment and service.yml files for jenkins 
 
 8- Apply those file 
 
-9- Check your web 
+9- kubectl get svc to get the External IP of jenkins 
+   
+10- configure Jenkins , add github credentials , Jenkins credentials and your Virtual instace private key 
 
+11- Add your Virtual Instance as a Slave --
+    ![image](https://user-images.githubusercontent.com/71693153/182432161-3fc30f07-cd33-40a0-ba8a-68f143fd5388.png)
+    
+    
+ 
 
-https://github.com/Pola-Ayaad/Terraform-GCP/issues/1#issue-1322610148
+    
+ 
+
