@@ -14,6 +14,9 @@ Creating Docker Image and pushing the image to Google artifacte registery :
 
 3- Create a Dockerfile for the project 
 
+![image](https://user-images.githubusercontent.com/71693153/182429095-21dc9ecf-b1f9-4b32-8e83-db5a6f63da28.png)
+
+
 4- Create a bash file .sh to force run redis inside the container
 
 5- Build your image docker image build . -t (image-name)
